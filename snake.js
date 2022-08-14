@@ -4,13 +4,13 @@ let scoreSpan;
 let circularWay;
 let killedByHittingItself;
 let snakeBodyDisappear;
-
+let life = 3;
 let appleImage;
 let bodyImage;
 let headImage;
 let countX = 0;
 let countY = 0;
-
+let sz = 3;
 let apple = {
     x: 0,
     y: 0,
@@ -27,6 +27,7 @@ let rightDirection = true;
 let upDirection = false;
 let downDirection = false;
 let inGame = true;
+let speed = 0;
 
 const DELAY = 140;
 const MAX_RAND = 29;
@@ -47,8 +48,11 @@ function getRandomInt(min, max) {
 
 
 function init() {
+    // speed++;
+    life = 3;
     countX = 0;
     countY = 0;
+    snake.size = 3;
     circularWay = document.getElementById('circular-way').checked;
     killedByHittingItself = document.getElementById('killed-by-hitting-itself').checked;
     snakeBodyDisappear = document.getElementById('snake-body-disappear').checked;
@@ -96,7 +100,7 @@ function doDrawing() {
 }
 
 function createInitialSnakePosition() {
-    snake.size = 3;
+    snake.size = sz;
     let a = getRandomInt(50, 299);
     for (let z = 0; z < snake.size; z++) {
         snake.x[z] = a - z * CELL_SIZE;
@@ -120,6 +124,7 @@ function drawSnake() {
 }
 
 function gameOver() {
+
     canvasContext.fillStyle = 'white';
     canvasContext.textBaseline = 'middle';
     canvasContext.textAlign = 'center';
@@ -172,28 +177,24 @@ onkeydown = function(e) {
     let key = e.keyCode;
 
     if ((key == LEFT_KEY) && (!rightDirection)) {
-
         leftDirection = true;
         upDirection = false;
         downDirection = false;
     }
 
     if ((key == RIGHT_KEY) && (!leftDirection)) {
-
         rightDirection = true;
         upDirection = false;
         downDirection = false;
     }
 
     if ((key == UP_KEY) && (!downDirection)) {
-
         upDirection = true;
         rightDirection = false;
         leftDirection = false;
     }
 
     if ((key == DOWN_KEY) && (!upDirection)) {
-
         downDirection = true;
         rightDirection = false;
         leftDirection = false;
@@ -232,8 +233,18 @@ function gameCycle() {
 
         checkApple();
         checkCollision();
-        move();
-        doDrawing();
+        if (!inGame) {
+            life--;
+            if (life) {
+                inGame = true;
+                sz = snake.size;
+                // downDirection = true;
+                createInitialSnakePosition();
+            } else gameOver();
+        } else {
+            move();
+            doDrawing();
+        }
         setTimeout("gameCycle()", DELAY);
     }
 }
