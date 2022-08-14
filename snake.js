@@ -89,7 +89,7 @@ function doDrawing() {
 }
 
 function createInitialSnakePosition() {
-
+    snake.size = 3;
     for (let z = 0; z < snake.size; z++) {
         snake.x[z] = 50 - z * CELL_SIZE;
         snake.y[z] = 50;
