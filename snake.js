@@ -42,6 +42,7 @@ const DOWN_KEY = 40;
 function init() {
     countX = 0;
     countY = 0;
+    snake.size = 3;
     circularWay = document.getElementById('circular-way').checked;
     killedByHittingItself = document.getElementById('killed-by-hitting-itself').checked;
     snakeBodyDisappear = document.getElementById('snake-body-disappear').checked;
