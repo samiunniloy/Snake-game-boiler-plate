@@ -10,7 +10,7 @@ let bodyImage;
 let headImage;
 let countX = 0;
 let countY = 0;
-
+let sz = 3;
 let apple = {
     x: 0,
     y: 0,
@@ -100,6 +100,7 @@ function doDrawing() {
 }
 
 function createInitialSnakePosition() {
+    snake.size = sz;
     let a = getRandomInt(50, 299);
     for (let z = 0; z < snake.size; z++) {
         snake.x[z] = a - z * CELL_SIZE;
@@ -236,6 +237,7 @@ function gameCycle() {
             life--;
             if (life) {
                 inGame = true;
+                sz = snake.size;
                 // downDirection = true;
                 createInitialSnakePosition();
             } else gameOver();
