@@ -29,7 +29,7 @@ let downDirection = false;
 let inGame = true;
 let speed = 0;
 
-const DELAY = 140;
+let DELAY = 140;
 const MAX_RAND = 29;
 const CELL_SIZE = 10;
 const CANVAS_WIDTH = 300;
@@ -150,6 +150,7 @@ function checkApple() {
         scoreSpan = value.innerHTML;
         scoreSpan++;
         value.innerHTML = scoreSpan;
+        // DELAY -= 10;
     }
 }
 
