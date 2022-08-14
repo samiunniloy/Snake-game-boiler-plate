@@ -39,6 +39,13 @@ const RIGHT_KEY = 39;
 const UP_KEY = 38;
 const DOWN_KEY = 40;
 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 function init() {
     countX = 0;
     countY = 0;
@@ -90,8 +97,7 @@ function doDrawing() {
 
 function createInitialSnakePosition() {
     snake.size = 3;
-    let b;
-    let a = Math.floor(Math.random() * 250);
+    let a = getRandomInt(50, 299);
     for (let z = 0; z < snake.size; z++) {
         snake.x[z] = a - z * CELL_SIZE;
         snake.y[z] = a;
