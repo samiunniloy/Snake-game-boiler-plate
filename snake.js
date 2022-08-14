@@ -28,7 +28,7 @@ let upDirection = false;
 let downDirection = false;
 let inGame = true;
 
-const DELAY = 140;
+let DELAY = 140;
 const MAX_RAND = 29;
 const CELL_SIZE = 10;
 const CANVAS_WIDTH = 300;
@@ -40,8 +40,7 @@ const UP_KEY = 38;
 const DOWN_KEY = 40;
 
 function init() {
-    countX = 0;
-    countY = 0;
+
     circularWay = document.getElementById('circular-way').checked;
     killedByHittingItself = document.getElementById('killed-by-hitting-itself').checked;
     snakeBodyDisappear = document.getElementById('snake-body-disappear').checked;
@@ -89,12 +88,10 @@ function doDrawing() {
 }
 
 function createInitialSnakePosition() {
-    snake.size = 3;
-    let b;
-    let a = Math.floor(Math.random() * 250);
+
     for (let z = 0; z < snake.size; z++) {
-        snake.x[z] = a - z * CELL_SIZE;
-        snake.y[z] = a;
+        snake.x[z] = 50 - z * CELL_SIZE;
+        snake.y[z] = 50;
     }
 }
 
@@ -139,6 +136,7 @@ function checkApple() {
         scoreSpan = value.innerHTML;
         scoreSpan++;
         value.innerHTML = scoreSpan;
+        DELAY -= 10;
     }
 }
 
